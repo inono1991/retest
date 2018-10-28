@@ -21,7 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('users', 'UserController@index');
-    Route::get('user/info', 'UserController@info');
+    Route::get('user/info/{id}', 'UserController@info');
+    Route::get('user/get-permissions-by-role', 'UserController@getPermissionsByRole');
     Route::patch('user/edit', 'UserController@edit');
     Route::delete('user/delete/{id}', 'UserController@delete');
 });
