@@ -45,10 +45,10 @@ class UserController extends Controller
         $userRoles = DB::table('user_role')->where('user_id', Auth::id())->pluck('role_id')->toArray();
         if (count($info->roles) > 0) {
             foreach ($info->roles as $role) {
-                if (! in_array($role, $userRoles)) {
+                if (! in_array($role->id, $userRoles)) {
                     unset($role);
                 }
-                $role->permissioon = Role::with('permissions')->find($role->id);
+                $role->permission = Role::with('permissions')->find($role->id);
             }
         }
         return response()->json(['code' => 0,'data'=> ['info' => $info]]);
